@@ -1,0 +1,19 @@
+{
+    "tailwindCSS.classAttributes": [
+        "class",
+        "className",
+        "ngClass",
+        "tailwindCSS.colorDecorators"
+    ],
+    "tailwindCSS.includeLanguages": {
+        "plaintext": "html"
+    },
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "tailwindCSS.experimental.configFile": null,
+    "tailwindCSS.inspectPort": null
+}
