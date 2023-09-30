@@ -1,8 +1,12 @@
 import React from "react";
+import useTheme from "../contexts/Theme";
 
 export default function Card() {
+  // const { themeMode } = useTheme();
+
   return (
     <div className="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      {/* <h3 className="dark:text-white">{themeMode}</h3> */}
       <a href="/">
         <img
           className="p-8 rounded-t-lg"

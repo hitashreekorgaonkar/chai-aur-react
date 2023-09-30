@@ -26,7 +26,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         type="text"
         placeholder="Password"
-      />
+      />{" "}
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );
