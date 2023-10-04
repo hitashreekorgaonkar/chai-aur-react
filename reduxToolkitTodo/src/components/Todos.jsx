@@ -1,14 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodo } from "../features/todo/todoSlice";
+import { addTodo, removeTodo, updateTodo } from "../features/todo/todoSlice";
 
 function Todos() {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
+  const [isEditing, setEditing] = useState(false);
+  const [state, setState] = useState({
+    text: "",
+  });
+  const edit = (id, text) => {
+    console.log("id, text", id, text);
+    setEditing(true);
+    setState({ ...state, id, text });
+  };
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const { text, id } = state;
+
+  const update = () => {
+    if (text === "") {
+      setState({ ...state });
+      return;
+    }
+    dispatch(updateTodo({ text, id }));
+    setEditing(false);
+  };
 
   return (
     <>
-      <div class="pt-5 text-lg font-b">Todos</div>
+      <input
+        type="text"
+        value={text}
+        name="text"
+        onChange={handleChange}
+      ></input>{" "}
+      <div className="pt-5 text-lg font-b">Todos</div>
       <ul className="list-none">
         {todos.map((todo) => (
           <li
@@ -16,6 +47,22 @@ function Todos() {
             key={todo.id}
           >
             <div className="text-white">{todo.text}</div>
+
+            {isEditing ? (
+              <button
+                onClick={update}
+                className="text-white bg-green-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+              >
+                Update
+              </button>
+            ) : (
+              <button
+                onClick={() => edit(todo.id, todo.text)}
+                className="text-white bg-yellow-300 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
+              >
+                Edit
+              </button>
+            )}
             <button
               onClick={() => dispatch(removeTodo(todo.id))}
               className="text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded text-md"
