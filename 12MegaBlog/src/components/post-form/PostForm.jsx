@@ -17,7 +17,7 @@ const PostForm = ({ post }) => {
     });
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => state.auth.userData);
   console.log("1 userData", userData);
   const submit = async (data) => {
     if (post) {
@@ -48,10 +48,10 @@ const PostForm = ({ post }) => {
           ...data,
           userId: userData.$id,
         });
-      }
 
-      if (dbPost) {
-        navigate(`/post/${dbPost.$id}`);
+        if (dbPost) {
+          navigate(`/post/${dbPost.$id}`);
+        }
       }
     }
   };
